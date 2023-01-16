@@ -2,40 +2,44 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
-	"time"
 
-	pb "github.com/anilthori/go-usermgmt-grpc/usermgmt"
+	"github.com/anilthori/go-usermgmt-grpc/usermgmt"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
 const (
-	address = "localhost:50051"
+	address = "localhost:9000"
 )
 
 func main() {
-
-	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
+	var conn *grpc.ClientConn
+	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+		log.Fatalf("could not connect: %s", err)
 	}
 	defer conn.Close()
-	c := pb.NewUserManagementClient(conn)
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
-	var new_users = make(map[string]int32)
-	new_users["Person1"] = 43
-	new_users["person2"] = 30
-	for name, age := range new_users {
-		r, err := c.CreateNewUser(ctx, &pb.NewUser{Name: name, Age: age})
-		if err != nil {
-			log.Fatalf("could not create user: %v", err)
-		}
-		log.Printf(`User Details:
-NAME: %s
-AGE: %d
-ID: %d`, r.GetName(), r.GetAge(), r.GetId())
+	c := usermgmt.NewUserManagementClient(conn)
 
+	log.Println(("Enter your name:"))
+	var name string
+	fmt.Scan(&name)
+	log.Printf("Enter your age")
+	var age int64
+	fmt.Scan(&age)
+
+	message := usermgmt.NewUserRequest{
+		Name: name,
+		Age:  age,
 	}
+
+	response, err := c.CreateNewUser(context.TODO(), &message)
+	if err != nil {
+		log.Fatalf("Error when calling PutUser: %s", err)
+	}
+
+	log.Printf("Response from Server: %s", response)
 }

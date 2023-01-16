@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	port = ":50051"
+	port = ":9000"
 )
 
 func ConnectDynamoDB() *dynamodb.DynamoDB {
