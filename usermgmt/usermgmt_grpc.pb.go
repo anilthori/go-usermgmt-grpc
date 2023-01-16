@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: usermgmt.proto
 
-package __
+package usermgmt
 
 import (
 	context "context"
