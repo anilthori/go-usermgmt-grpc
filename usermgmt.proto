@@ -6,6 +6,8 @@ option go_package = "./usermgmt";
 
 service UserManagement {
   rpc CreateNewUser (NewUserRequest) returns (NewUserResponse) {}
+  // rpc 
+  rpc GetUser(UserDetailsRequest) returns (UserDetailsResponse){} 
 }
 
 message NewUserRequest {
@@ -17,3 +19,16 @@ message NewUserRequest {
 message NewUserResponse {
   string user_id=1;
 }
+
+message UserDetailsRequest{
+  string user_id = 1;
+}
+
+message UserDetailsResponse{
+  string user_id = 1;
+  string name = 2;
+  int64 age = 3;
+}
+
+
+
