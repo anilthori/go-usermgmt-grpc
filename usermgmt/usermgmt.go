@@ -30,5 +30,5 @@ func (U *UserServer) CreateNewUser(ctx context.Context, user *NewUserRequest) (*
 		return nil, nil
 	}
 	log.Printf("We have inserted a new item!\n")
-	return &NewUserResponse{name: user.name}, nil
+	return &NewUserResponse{Name: user.Name}, nil
 }

@@ -43,21 +43,19 @@ func (c *userManagementClient) CreateNewUser(ctx context.Context, in *NewUserReq
 }
 
 // UserManagementServer is the server API for UserManagement service.
-// All implementations must embed UnimplementedUserManagementServer
+// All implementations should embed UnimplementedUserManagementServer
 // for forward compatibility
 type UserManagementServer interface {
 	CreateNewUser(context.Context, *NewUserRequest) (*NewUserResponse, error)
-	mustEmbedUnimplementedUserManagementServer()
 }
 
-// UnimplementedUserManagementServer must be embedded to have forward compatible implementations.
+// UnimplementedUserManagementServer should be embedded to have forward compatible implementations.
 type UnimplementedUserManagementServer struct {
 }
 
 func (UnimplementedUserManagementServer) CreateNewUser(context.Context, *NewUserRequest) (*NewUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateNewUser not implemented")
 }
-func (UnimplementedUserManagementServer) mustEmbedUnimplementedUserManagementServer() {}
 
 // UnsafeUserManagementServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to UserManagementServer will
