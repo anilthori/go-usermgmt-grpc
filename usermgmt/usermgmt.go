@@ -16,7 +16,8 @@ type UserServer struct {
 }
 
 func (U *UserServer) CreateNewUser(ctx context.Context, user *NewUserRequest) (*NewUserResponse, error) {
-	fmt.Println(user)
+	fmt.Println("hello")
+	// fmt.Println(user.Name)
 
 	av, err := dynamodbattribute.MarshalMap(user)
 
@@ -30,5 +31,5 @@ func (U *UserServer) CreateNewUser(ctx context.Context, user *NewUserRequest) (*
 		return nil, nil
 	}
 	log.Printf("We have inserted a new item!\n")
-	return &NewUserResponse{Name: user.Name}, nil
+	return &NewUserResponse{Name: users.Name}, nil
 }

@@ -41,7 +41,7 @@ func main() {
 
 	DB := ConnectDynamoDB()
 
-	umgmt := usermgmt.UserServer{DB, "users-service-dev"}
+	umgmt := usermgmt.UserServer{DB, "users"}
 
 	s := grpc.NewServer()
 

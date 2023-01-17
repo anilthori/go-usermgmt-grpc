@@ -25,18 +25,22 @@ func main() {
 
 	c := usermgmt.NewUserManagementClient(conn)
 
+	log.Println("Enter candid Id: ")
+	var user_id string
+	fmt.Scan(&user_id)
 	log.Println(("Enter your name:"))
 	var name string
 	fmt.Scan(&name)
 	log.Printf("Enter your age")
-	var age int64
+	var age int32
 	fmt.Scan(&age)
 
-	message := c.NewUserRequest{
-		Name: name,
-		Age:  age,
+	message := usermgmt.NewUserRequest{
+		UserId: user_id,
+		Name:   name,
+		Age:    age,
 	}
-
+	// fmt.Println(message.Name)
 	response, err := c.CreateNewUser(context.TODO(), &message)
 	if err != nil {
 		log.Fatalf("Error when calling PutUser: %s", err)
@@ -44,5 +48,3 @@ func main() {
 
 	log.Printf("Response from Server: %s", response)
 }
-
-//

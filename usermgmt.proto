@@ -9,10 +9,11 @@ service UserManagement {
 }
 
 message NewUserRequest {
-  string name = 1;
-  int32 age = 2;
+  string user_id=1;
+  string name = 2;
+  int32 age = 3;
 }
 
 message NewUserResponse {
-  string name = 1;
+  string user_id=1;
 }
