@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/anilthori/go-usermgmt-grpc/usermgmt"
-	"golang.org/x/net/context"
+	// "golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
@@ -31,7 +31,7 @@ func main() {
 	var age int64
 	fmt.Scan(&age)
 
-	message := usermgmt.NewUserRequest{
+	message := c.NewUserRequest{
 		Name: name,
 		Age:  age,
 	}
