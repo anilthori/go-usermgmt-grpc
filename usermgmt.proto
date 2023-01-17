@@ -26,8 +26,8 @@ message UserDetailsRequest{
 
 message UserDetailsResponse{
   string user_id = 1;
-  string name = 2;
-  int64 age = 3;
+  // string name = 2;
+  // int64 age = 3;
 }
 
 
