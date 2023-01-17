@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/anilthori/go-usermgmt-grpc/usermgmt"
-	"golang.org/x/net/context"
+	// "golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
