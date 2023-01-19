@@ -5,8 +5,8 @@ import (
 	"log"
 	"net"
 
-	"encoding/json"
-	"github.com/anilthori/go-usermgmt-grpc/redis"
+	// "encoding/json"
+	database "github.com/anilthori/go-usermgmt-grpc/redis"
 	"github.com/anilthori/go-usermgmt-grpc/usermgmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -44,9 +44,13 @@ func main() {
 	}
 
 	DB := ConnectDynamoDB()
-	redisDB, rerr := database.createRedisDatabase()
+	redisDB, rerr := database.CreateRedisDatabase()
 
-	umgmt := usermgmt.UserServer{DB, "users"}
+	if rerr != nil {
+		fmt.Println("Unable to connect to Redis")
+	}
+
+	umgmt := usermgmt.UserServer{DB, redisDB, "users"}
 
 	s := grpc.NewServer()
 
