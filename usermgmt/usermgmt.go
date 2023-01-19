@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	// "github.com/go-redis/redis"
 )
 
 type UserServer struct {
@@ -16,10 +17,7 @@ type UserServer struct {
 }
 
 func (U *UserServer) CreateNewUser(ctx context.Context, user *NewUserRequest) (*NewUserResponse, error) {
-	// fmt.Println("hello")
-
-	// fmt.Println(user.UserId)
-
+	// storing in DynamoDB
 	av, err := dynamodbattribute.MarshalMap(user)
 
 	input := &dynamodb.PutItemInput{
@@ -42,6 +40,3 @@ func (U *UserServer) GetUser(ctx context.Context, message *UserDetailsRequest) (
 	}, nil
 
 }
-
-// Name:   message.Name,
-// Age:    message.Age,

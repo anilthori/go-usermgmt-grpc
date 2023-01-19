@@ -5,6 +5,8 @@ import (
 	"log"
 	"net"
 
+	"encoding/json"
+	"github.com/anilthori/go-usermgmt-grpc/redis"
 	"github.com/anilthori/go-usermgmt-grpc/usermgmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -33,6 +35,8 @@ func ConnectDynamoDB() *dynamodb.DynamoDB {
 
 var DB *dynamodb.DynamoDB
 
+var redisDB database.Database
+
 func main() {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
@@ -40,6 +44,7 @@ func main() {
 	}
 
 	DB := ConnectDynamoDB()
+	redisDB, rerr := database.createRedisDatabase()
 
 	umgmt := usermgmt.UserServer{DB, "users"}
 
