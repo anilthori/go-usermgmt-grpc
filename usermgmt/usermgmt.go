@@ -16,8 +16,9 @@ type UserServer struct {
 }
 
 func (U *UserServer) CreateNewUser(ctx context.Context, user *NewUserRequest) (*NewUserResponse, error) {
-	fmt.Println("hello")
-	// fmt.Println(user.Name)
+	// fmt.Println("hello")
+
+	// fmt.Println(user.UserId)
 
 	av, err := dynamodbattribute.MarshalMap(user)
 
@@ -38,8 +39,9 @@ func (U *UserServer) GetUser(ctx context.Context, message *UserDetailsRequest) (
 	// _, err := U.DynamodbClient.GetItem(message.)
 	return &UserDetailsResponse{
 		UserId: message.UserId,
-		Name:   message.Name,
-		Age:    message.Age,
 	}, nil
 
 }
+
+// Name:   message.Name,
+// Age:    message.Age,

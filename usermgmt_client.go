@@ -38,8 +38,8 @@ func main() {
 	message := usermgmt.NewUserRequest{
 		UserId: user_id,
 		Name:   name,
-		
-		Age:    age,
+
+		Age: age,
 	}
 	// fmt.Println(message.Name)
 	response, err := c.CreateNewUser(context.TODO(), &message)
@@ -48,13 +48,12 @@ func main() {
 	}
 
 	log.Printf("Response from Server: %s", response)
-}
 
- log.Printf("Enter candid id to search:")
+	log.Printf("Enter candid id to search:")
 	var user_id1 string
 	fmt.Scan(&user_id1)
 
-	message1 := transfer.UserDetailsRequest{
+	message1 := usermgmt.UserDetailsRequest{
 		UserId: user_id1,
 	}
 	response1, err1 := c.GetUser(context.TODO(), &message1)

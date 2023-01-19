@@ -19,7 +19,7 @@ const (
 
 func ConnectDynamoDB() *dynamodb.DynamoDB {
 	cfg := &aws.Config{
-		Region:   aws.String("ap-southwest-1"),
+		Region:   aws.String("ap-southeast-1"),
 		Endpoint: aws.String("http://localhost:8000"),
 	}
 
